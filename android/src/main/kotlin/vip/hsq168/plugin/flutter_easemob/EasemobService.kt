@@ -28,17 +28,17 @@ class EasemobService(var context: Context) : MethodChannel.MethodCallHandler {
         @JvmStatic
         private val TAG = "EasemobService"
 
-        @JvmStatic
-        private lateinit var sPluginRegistrantCallback: PluginRegistry.PluginRegistrantCallback
+//        @JvmStatic
+//        private lateinit var sPluginRegistrantCallback: PluginRegistry.PluginRegistrantCallback
         @JvmStatic
         private var sBackgroundFlutterView: FlutterNativeView? = null
         @JvmStatic
         private val sServiceStarted = AtomicBoolean(false)
 
 
-        fun setPluginRegistrant(callback: PluginRegistry.PluginRegistrantCallback) {
-            sPluginRegistrantCallback = callback
-        }
+//        fun setPluginRegistrant(callback: PluginRegistry.PluginRegistrantCallback) {
+//            sPluginRegistrantCallback = callback
+//        }
     }
 
 
@@ -90,7 +90,7 @@ class EasemobService(var context: Context) : MethodChannel.MethodCallHandler {
         val latch = CountDownLatch(1)
         var result: Any? = null
         runOnUIThread {
-            mBackgroundChannel.invokeMethod("do", mapOf("callback" to callback, "arguments" to arguments), object : MethodChannel.Result {
+            mBackgroundChannel.invokeMethod("do", mapOf("callback" to callback.toString(), "arguments" to arguments), object : MethodChannel.Result {
                 override fun notImplemented() {
                     latch.countDown()
                 }

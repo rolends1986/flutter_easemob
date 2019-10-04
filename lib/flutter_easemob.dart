@@ -4,23 +4,11 @@ import 'package:flutter/services.dart';
 import './easemob_callback_dispatcher.dart';
 
 typedef Future<dynamic> UserProfileHandler(String userName);
+typedef Future<dynamic> NotifyClickHandler(String json);
 
 class FlutterEasemob {
   static const MethodChannel _channel =
-      const MethodChannel('vip.hsq168.plugin.flutter_easemob');
-
-  static Map<String, dynamic> handlers = {};
-
-  static setHandler(String name, Function handler) async {
-    var callbackHandle =
-        PluginUtilities.getCallbackHandle(handler).toRawHandle();
-    await _channel
-        .invokeMethod('setHandler', {"name": name, "callback": callbackHandle});
-  }
-
-  static void setUserProfileHandler(UserProfileHandler userProfileHandler) {
-    setHandler("getUserInfo", userProfileHandler);
-  }
+  const MethodChannel('vip.hsq168.plugin.flutter_easemob');
 
   static Future enableVivoPush() async {
     await _channel.invokeMethod('enableVivoPush');
@@ -74,5 +62,29 @@ class FlutterEasemob {
   static Future startServiceIM(String serviceNumber) async {
     return await _channel
         .invokeMethod('startServiceIM', {"serviceNumber": serviceNumber});
+  }
+
+  static Future getAllMessages(String userName) async {
+    var messages =
+    await _channel.invokeMethod('getAllMessages', {"userName": userName});
+    return messages;
+  }
+
+  ///*************  handlers        *************/
+
+  static setHandler(String name, Function handler) async {
+//    var callbackHandle = PluginUtilities.getCallbackHandle(handler)
+//        .toRawHandle()
+//        .toString();
+//    await _channel
+//        .invokeMethod('setHandler', {"name": name, "callback": callbackHandle});
+  }
+
+  static void setUserProfileHandler(UserProfileHandler userProfileHandler) {
+    setHandler("getUserInfo", userProfileHandler);
+  }
+
+  static void setNotifyClickHandler(NotifyClickHandler notifyClickHandler) {
+    setHandler("notifyClick", notifyClickHandler);
   }
 }

@@ -44,8 +44,10 @@ class _MyAppState extends State<MyApp> {
     login();
   }
 
-  void login() {
-    FlutterEasemob.login("huc_10_nop_8666", "huc_10_nop_8666");
+  Future login() async {
+    await FlutterEasemob.login("huc_10_nop_8666", "huc_10_nop_8666");
+    await FlutterEasemob.loadAllConversations();
+    var messages = await FlutterEasemob.getAllMessages("admin");
   }
 
   start() {

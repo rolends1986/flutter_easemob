@@ -18,7 +18,7 @@ import vip.hsq168.plugin.flutter_easemob.utils.UserProfile
 import java.util.concurrent.ConcurrentHashMap
 
 
-class UserProfileProvider(var context: Context, var service: EasemobService) : UIProvider.UserProfileProvider {
+class UserProfileProvider(var context: Context   ) : UIProvider.UserProfileProvider {
 
     companion object {
         var userProfileMap: MutableMap<String, UserProfile> = ConcurrentHashMap()
@@ -52,23 +52,23 @@ class UserProfileProvider(var context: Context, var service: EasemobService) : U
             }
 
         }
-        if (agentInfo == null) {
-            GlobalScope.async {
-                var profile = getUserProfile(message!!.from())
-                if (profile.nickName != "") usernickView!!.text = profile.nickName
-                if (profile.avater != "") Glide.with(context!!).load(profile.avater).apply(RequestOptions.placeholderOf(hdDefaultAvatar).diskCacheStrategy(DiskCacheStrategy.ALL)).into(userAvatarView!!)
-            }
-        }
+//        if (agentInfo == null) {
+//            GlobalScope.async {
+//                var profile = getUserProfile(message!!.from())
+//                if (profile.nickName != "") usernickView!!.text = profile.nickName
+//                if (profile.avater != "") Glide.with(context!!).load(profile.avater).apply(RequestOptions.placeholderOf(hdDefaultAvatar).diskCacheStrategy(DiskCacheStrategy.ALL)).into(userAvatarView!!)
+//            }
+//        }
     }
 
-    private fun getUserProfile(userName: String): UserProfile {
-        return if (userProfileMap.containsKey(userName)) {
-            userProfileMap[userName]!!
-        } else {
-            var profile = service.getUserProfile(userName)
-            if (profile.nickName != "" && profile.avater != "")
-                userProfileMap[userName] = profile
-            profile
-        }
-    }
+//    private fun getUserProfile(userName: String): UserProfile {
+//        return if (userProfileMap.containsKey(userName)) {
+//            userProfileMap[userName]!!
+//        } else {
+//            var profile = service.getUserProfile(userName)
+//            if (profile.nickName != "" && profile.avater != "")
+//                userProfileMap[userName] = profile
+//            profile
+//        }
+//    }
 }
