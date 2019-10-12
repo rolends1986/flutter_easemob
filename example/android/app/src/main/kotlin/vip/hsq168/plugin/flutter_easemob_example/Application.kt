@@ -12,7 +12,7 @@ import vip.hsq168.plugin.flutter_easemob.EasemobService
 class Application: FlutterApplication(), PluginRegistry.PluginRegistrantCallback {
     override fun onCreate() {
         super.onCreate()
-        EasemobService.setPluginRegistrant(this)
+      //  EasemobService.setPluginRegistrant(this)
 
 
     }

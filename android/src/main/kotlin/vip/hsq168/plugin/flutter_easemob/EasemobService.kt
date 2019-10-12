@@ -54,7 +54,7 @@ class EasemobService(var context: Context) : MethodChannel.MethodCallHandler {
                     return
                 }
                 val callbackInfo = FlutterCallbackInformation.lookupCallbackInformation(callbackHandle)
-                if (callbackInfo == null) {
+                if (callbackInfo.callbackName==null) {
                     Log.e(TAG, "Fatal: failed to find callback")
                     return
                 }

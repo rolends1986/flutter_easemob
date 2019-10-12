@@ -69,29 +69,30 @@ class FlutterEasemobPlugin(var registrar: Registrar) : MethodCallHandler {
 //            var regId = MiPushClient.getRegId(registrar.activity().application)
 //            Log.d("MIPUSH", "regId:${regId}")
             //  MiPushClient.registerPush(registrar.context(), "2882303761518149924", "5291814984924")
-
+            initSdk(registrar)
             channel = MethodChannel(registrar.messenger(), "vip.hsq168.plugin.flutter_easemob")
             channel!!.setMethodCallHandler(FlutterEasemobPlugin(registrar))
 
 
         }
 
+        fun initSdk(registrar: Registrar){
+            var packageManager=registrar.activeContext().packageManager
+            var appInfo=packageManager.getApplicationInfo(registrar.activity().packageName,PackageManager.GET_META_DATA)
+            if(appInfo.metaData.containsKey("EasemobAppkey") &&  appInfo.metaData.containsKey("EasemobTenantId")){
+                var appKey=appInfo.metaData["EasemobAppkey"].toString()
+                var tenantId=appInfo.metaData["EasemobTenantId"].toString()
+                init(registrar.activeContext().applicationContext,appKey,tenantId)
+            }else{
+                Log.d("Easemob", "===========请在AndroidManifest填入EasemobAppkey和EasemobTenantId================")
+            }
 
-        fun init(application: Application, appkey: String, tenantId: String) {
+        }
 
-            var builder: EMPushConfig.Builder = EMPushConfig.Builder(application)
 
-            var options = EMOptions()
-            options.pushConfig = builder.build()
-            // 默认添加好友时，是不需要验证的，改成需要验证
-            options.acceptInvitationAlways = false
-            // 是否自动将消息附件上传到环信服务器，默认为True是使用环信服务器上传下载，如果设为 false，需要开发者自己处理附件消息的上传和下载
-            options.autoTransferMessageAttachments = true
-            // 是否自动下载附件类消息的缩略图等，默认为 true 这里和上边这个参数相关联
-            options.setAutoDownloadThumbnail(true)
-            options.autoLogin = true
-            //初始化
-            EMClient.getInstance().init(application, options)
+        fun init(application: Context, appkey: String, tenantId: String) {
+
+
 
             val chatOptions = ChatClient.Options()
             chatOptions.setAppkey(appkey)//必填项，appkey获取地址：kefu.easemob.com，“管理员模式 > 渠道管理 > 手机APP”页面的关联的“AppKey”
@@ -116,6 +117,7 @@ class FlutterEasemobPlugin(var registrar: Registrar) : MethodCallHandler {
             ChatClient.getInstance().addConnectionListener(vip.hsq168.plugin.flutter_easemob.infrastructure.ConnectionListener())
             ChatClient.getInstance().chatManager().addMessageListener(vip.hsq168.plugin.flutter_easemob.infrastructure.ChatClientMessageListener())
             EMClient.getInstance().chatManager().addMessageListener(vip.hsq168.plugin.flutter_easemob.infrastructure.EMClientMessageListener())
+            EMClient.getInstance().options.autoLogin=true
         }
 
 

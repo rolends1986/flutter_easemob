@@ -13,8 +13,8 @@
 
 
         <!-- 设置环信应用的AppKey -->
-        <meta-data android:name="EASEMOB_APPKEY"  android:value="1150190903085951#huashangqing" />
-
+        <meta-data android:name="EasemobAppkey"  android:value="1150190903085951#huashangqing" />
+        <meta-data android:name="EasemobTenantId"  android:value="74175" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
