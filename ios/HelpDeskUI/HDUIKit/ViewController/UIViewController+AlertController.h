@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface UIViewController (AlertController)
+#import "UIViewController+Base.h"
+@interface BaseViewController (AlertController)
 - (void)showAlertWithTitle:(NSString *)aTitle
     actionTitles:(NSArray *)titles
                 cancelTitle:(NSString *)aCancelTitle

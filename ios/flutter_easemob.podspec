@@ -27,8 +27,11 @@ easemob  flutter
   s.xcconfig = { 'OTHER_CFLAGS' => '$(inherited) -ObjC  ' }
   # -l$(PODS_TARGET_SRCROOT)/HelpDeskUI/HDUIKit/3rdparty/DeviceHelper/HDVoiceConvert/opencore-amrnb/hdlibopencore-amrnb.a -l$(PODS_TARGET_SRCROOT)/HelpDeskUI/HDUIKit/3rdparty/DeviceHelper/HDVoiceConvert/opencore-amrwb/hdlibopencore-amrwb.a
   s.pod_target_xcconfig = { 'OTHER_LDFLAGS' => '$(inherited) -lObjC' }
-  
-  s.resources= ['HelpDeskUI/resources/HelpDeskUIResource.bundle','HelpDeskUI/resources/newResources/*.png','HelpDeskUI/HDUIKit/**/*.png','HelpDeskUI/HDUIKit/3rdparty/MWPhotoBrowser/MWPhotoBrowser.bundle','HelpDeskUI/HDUIKit/3rdparty/MJRefresh/MJRefresh.bundle','HelpDeskUI/HDUIKit/3rdparty/MJRefresh/MJRefresh.bundle']
- 
+  #HelpDeskUIResource.bundle
+  s.resources= [ 'HelpDeskUI/resources/newResources/*.png','HelpDeskUI/HDUIKit/**/*.png','HelpDeskUI/HDUIKit/3rdparty/MWPhotoBrowser/MWPhotoBrowser.bundle','HelpDeskUI/HDUIKit/3rdparty/MJRefresh/MJRefresh.bundle','HelpDeskUI/HDUIKit/3rdparty/MJRefresh/MJRefresh.bundle']
+  s.resource_bundles = {
+   'HelpDeskUIResource' => ['HelpDeskUI/resources/HelpDeskUIResource/*'],
+   'Lang' => ['HelpDeskUI/resources/Lang/*']
+ }
 end
 

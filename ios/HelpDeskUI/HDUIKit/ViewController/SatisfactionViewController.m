@@ -34,7 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = HDLocalizedString(@"title.satisfaction", @"satisfaction evaluation");
+    self.title = @"评价";
     
     [self setupBarButtonItem];
     self.view.backgroundColor = [UIColor colorWithRed:235 / 255.0 green:235 / 255.0 blue:235 / 255.0 alpha:1.0];

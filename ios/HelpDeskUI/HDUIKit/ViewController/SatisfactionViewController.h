@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "HDIMessageModel.h"
+#import "UIViewController+Base.h"
 @protocol SatisfactionDelegate <NSObject>
 
 @optional
@@ -19,7 +20,7 @@
 
 @end
 
-@interface SatisfactionViewController : UIViewController
+@interface SatisfactionViewController : BaseViewController
 
 @property (nonatomic, strong) id<HDIMessageModel> messageModel;
 @property (nonatomic, weak) id<SatisfactionDelegate> delegate;

@@ -58,7 +58,7 @@
 替换前 NSLocalizedString(@"ticket_name", @"Name")
 替换后 HDLocalizedString(@"ticket_name", @"Name")
  */
-#define HDLocalizedString(key, comment) \
+#define R_HDLocalizedString(key, comment) \
 [HDUIResourceBundle localizedStringForKey:(key) value:@"" table:nil]
 //Ext keyWord
 #define kMesssageExtWeChat @"weichat"
@@ -89,5 +89,8 @@
 #define fUserDefaults [NSUserDefaults standardUserDefaults]
 
 @interface HelpDeskUI : NSObject
-
++(NSString*)HDLocalizedString:(NSString*) key
+                   withComment:(NSString*) comment;
 @end
+
+#define HDLocalizedString(key, comment)  [HelpDeskUI HDLocalizedString:key withComment:comment]

@@ -11,8 +11,8 @@
  */
 
 #import <UIKit/UIKit.h>
-
-@interface HDViewController : UIViewController
+#import "UIViewController+Base.h"
+@interface HDViewController : BaseViewController
 
 @property (strong, nonatomic) NSArray *rightItems;
 

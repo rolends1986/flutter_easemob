@@ -90,23 +90,12 @@ typedef enum : NSUInteger {
 }
 
 
-- (void) setNaviBar:(BOOL)hidden{
-    UIWindow *window=[[UIApplication sharedApplication] keyWindow];
-    if(window){
-           UIViewController *rootController=[window rootViewController];
-           if(rootController && [rootController isKindOfClass:[UINavigationController class]]){
-               [(UINavigationController*)rootController  setNavigationBarHidden:hidden];
-               return;
-           }
-     }
-}
 
  
 
 
 
-- (void)viewDidLoad {
-     [self setNaviBar:NO];
+- (void)viewDidLoad { 
     [super viewDidLoad];
     
     if (_conversation.officialAccount.name) {
@@ -286,13 +275,11 @@ typedef enum : NSUInteger {
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self setNaviBar:NO];
     [super viewWillAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self setNaviBar:YES];
     [super viewWillDisappear:animated];
 }
 
@@ -1762,21 +1749,21 @@ typedef enum : NSUInteger {
         hcont.arguments = arguments;
         if ([HDMessageHelper getMessageExtType:message] == HDExtToCustomServiceMsg) {
             //发送透传消息
-            HDMessage *aHMessage = [HDSDKHelper cmdMessageFormatTo:self.conversation.conversationId];
-            [aHMessage addCompositeContent:hcont];
-            __weak typeof(self) weakSelf = self;
-            [[HDClient sharedClient].chatManager sendMessage:aHMessage progress:nil completion:^(HDMessage *aMessage, HDError *aError)
-            {
-                _isSendingTransformMessage = NO;
-                if (!aError) {
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        //更新ext，目的当点击一次转人工客服按钮且cmd发送成功后，此按钮不在被使用
-                        [weakSelf updateTransferMessageExt:message];
-                    });
-                } else {
-                    [weakSelf showHint:HDLocalizedString(@"transferToKf.fail", @"Transfer to the artificial customer service request failed, please confirm the connection status!")];
-                }
-            }];
+//            HDMessage *aHMessage = [HDSDKHelper cmdMessageFormatTo:self.conversation.conversationId];
+//            [aHMessage addCompositeContent:hcont];
+//            __weak typeof(self) weakSelf = self;
+//            [[HDClient sharedClient].chatManager sendMessage:aHMessage progress:nil completion:^(HDMessage *aMessage, HDError *aError)
+//            {
+//                _isSendingTransformMessage = NO;
+//                if (!aError) {
+//                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//                        //更新ext，目的当点击一次转人工客服按钮且cmd发送成功后，此按钮不在被使用
+//                        [weakSelf updateTransferMessageExt:message];
+//                    });
+//                } else {
+//                    [weakSelf showHint:HDLocalizedString(@"transferToKf.fail", @"Transfer to the artificial customer service request failed, please confirm the connection status!")];
+//                }
+//            }];
         }
     }
     if ([eventName isEqualToString:HRouterEventTapEvaluate]) {

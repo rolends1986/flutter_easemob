@@ -11,10 +11,10 @@
  */
 
 #import <UIKit/UIKit.h>
-
+#import "UIViewController+Base.h"
 #define KCELLDEFAULTHEIGHT 50
 
-@interface HDRefreshTableViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface HDRefreshTableViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *_rightItems;
 }

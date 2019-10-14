@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "UIViewController+Base.h"
 @protocol EasemobWebViewInterface <NSObject>
 
 - (void)closeWindow;
@@ -15,7 +15,7 @@
 - (NSString *) imToken;
 @end
 
-@interface HDFormWebViewController : UIViewController
+@interface HDFormWebViewController : BaseViewController
 @property (nonatomic,strong) NSString *url;
 
 @end
